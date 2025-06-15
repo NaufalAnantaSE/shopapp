@@ -1,19 +1,15 @@
 const path = require('path');
 const express = require('express');
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-dotenv.config();
+const connectDB = require('./config/db');
 
 const app = express();
 
 
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-.then(() => console.log('MongoDB connected'))
-.catch(err => console.error('MongoDB connection error:', err));
+// models
+const Product = require('./models/product');
 
+
+connectDB(); 
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
